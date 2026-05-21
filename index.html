@@ -107,20 +107,16 @@
             border-bottom: 1px solid #1e2330;
             vertical-align: middle;
         }
-        /* Viền tròn cho top 1 và top 2 */
+        /* Viền vàng - bạc bo tròn */
         .rank-gold {
             background: #1e1a12;
-            border: 2px solid #ffd966;
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 0 0 1px #ffd966 inset;
         }
         .rank-silver {
             background: #1a1c22;
-            border: 2px solid #c0c0c0;
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 0 0 1px #c0c0c0 inset;
         }
         .rank-gold td, .rank-silver td {
             background: transparent;
@@ -251,7 +247,7 @@
         .modal-body {
             padding: 1.5rem;
         }
-        /* Form thông tin chính - nằm trên */
+        /* Phần thông tin chính - nằm trên */
         .main-info {
             background: #0c0f18;
             border-radius: 20px;
@@ -283,6 +279,7 @@
             font-family: inherit;
             font-size: 0.85rem;
         }
+        /* Mode rankings - nằm dưới */
         .modes-section {
             background: #0c0f18;
             border-radius: 20px;
@@ -471,7 +468,7 @@
             <thead>
                 <tr><th>Rank</th><th>Player</th><th>Region</th><th>Overall Tier</th><th>Tested Modes</th><th>Actions</th></tr>
             </thead>
-            <tbody id="tableBody"><tr class="empty-row"><td colspan="6">✨ No fighters yet. Click "Add Player" to start! ✨</tr></tbody>
+            <tbody id="tableBody"><tr class="empty-row"><td colspan="6">✨ No fighters yet. Click "Add Player" to start! ✨</td></tr></tbody>
         </table>
     </div>
     <footer>💡 Click on name/avatar to view details. Gold border = #1 overall, Silver = #2.</footer>
@@ -535,7 +532,7 @@
 </div>
 
 <script>
-    // ---------- MODE DEFINITIONS ----------
+    // MODE DEFINITIONS (giữ nguyên)
     const MODES = [
         { id: "sword", name: "Sword", iconUrl: "https://media.discordapp.net/attachments/1502227983694303312/1502227983828783175/sword.png?ex=6a0ec455&is=6a0d72d5&hm=4b06b00213a4e4952bda00182688054045f9c72941a65243c5ff08dfac6c6e85&=&format=webp&quality=lossless&width=569&height=569" },
         { id: "axe", name: "Axe", iconUrl: "https://media.discordapp.net/attachments/1502227900072595476/1502227900210876437/axe.png?ex=6a0ec441&is=6a0d72c1&hm=dfce75bfd6d289edbaa635faff6334abd2c196f68117378471db73c953bb3fde&=&format=webp&quality=lossless&width=569&height=569" },
@@ -591,7 +588,7 @@
         const tbody = document.getElementById('tableBody');
         if (!tbody) return;
         if (players.length === 0) {
-            tbody.innerHTML = '<tr class="empty-row"><td colspan="6">✨ No fighters yet. Click "Add Player" to start! ✨</tr>';
+            tbody.innerHTML = '<tr class="empty-row"><td colspan="6">✨ No fighters yet. Click "Add Player" to start! ✨</td></tr>';
             return;
         }
         tbody.innerHTML = '';
