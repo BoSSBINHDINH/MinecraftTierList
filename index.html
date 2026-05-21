@@ -89,7 +89,8 @@
         }
         .tier-table {
             width: 100%;
-            border-collapse: collapse;
+            border-collapse: separate;
+            border-spacing: 0;
             font-size: 0.85rem;
             min-width: 950px;
         }
@@ -106,17 +107,34 @@
             border-bottom: 1px solid #1e2330;
             vertical-align: middle;
         }
+        /* Viền vàng - bạc bo tròn hoàn hảo */
         .rank-gold {
             background: #1e1a12;
             border: 2px solid #ffd966;
-            border-radius: 16px;
+            border-radius: 20px;
+            overflow: hidden;
             box-shadow: 0 0 0 1px #ffd966 inset;
         }
         .rank-silver {
             background: #1a1c22;
             border: 2px solid #c0c0c0;
-            border-radius: 16px;
+            border-radius: 20px;
+            overflow: hidden;
             box-shadow: 0 0 0 1px #c0c0c0 inset;
+        }
+        .rank-gold td, .rank-silver td {
+            background: transparent;
+            border-bottom: 1px solid #2a2a3a;
+        }
+        .rank-gold td:first-child,
+        .rank-silver td:first-child {
+            border-top-left-radius: 20px;
+            border-bottom-left-radius: 20px;
+        }
+        .rank-gold td:last-child,
+        .rank-silver td:last-child {
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
         }
         .player-cell {
             display: flex;
@@ -452,7 +470,7 @@
             <thead>
                 <tr><th>Rank</th><th>Player</th><th>Region</th><th>Overall Tier</th><th>Tested Modes</th><th>Actions</th></tr>
             </thead>
-            <tbody id="tableBody"><tr class="empty-row"><td colspan="6">✨ No fighters yet. Click "Add Player" to start! ✨</tr></tbody>
+            <tbody id="tableBody"><tr class="empty-row"><td colspan="6">✨ No fighters yet. Click "Add Player" to start! ✨</td></tr></tbody>
         </table>
     </div>
     <footer>💡 Click on name/avatar to view details. Gold border = #1 overall, Silver = #2.</footer>
@@ -503,7 +521,7 @@
     </div>
 </div>
 
-<!-- Detail Modal (có avatar, căn chỉnh dòng OVERALL) -->
+<!-- Detail Modal -->
 <div id="detailModal" class="modal">
     <div class="modal-content">
         <div class="modal-header">
@@ -570,7 +588,7 @@
         const tbody = document.getElementById('tableBody');
         if (!tbody) return;
         if (players.length === 0) {
-            tbody.innerHTML = '<tr class="empty-row"><td colspan="6">✨ No fighters yet. Click "Add Player" to start! ✨</tr>';
+            tbody.innerHTML = '<tr class="empty-row"><td colspan="6">✨ No fighters yet. Click "Add Player" to start! ✨</td></tr>';
             return;
         }
         tbody.innerHTML = '';
@@ -622,7 +640,6 @@
         }
     }
 
-    // Detail popup có avatar, căn chỉnh dòng OVERALL
     function showDetailModal(ign) {
         const player = players.find(p => p.ign.toLowerCase() === ign.toLowerCase());
         if (!player) return;
