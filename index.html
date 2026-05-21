@@ -89,8 +89,7 @@
         }
         .tier-table {
             width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
+            border-collapse: collapse;
             font-size: 0.85rem;
             min-width: 950px;
         }
@@ -107,30 +106,17 @@
             border-bottom: 1px solid #1e2330;
             vertical-align: middle;
         }
-        /* Viền vàng - bạc bo tròn */
         .rank-gold {
             background: #1e1a12;
-            border-radius: 20px;
-            overflow: hidden;
+            border: 2px solid #ffd966;
+            border-radius: 16px;
+            box-shadow: 0 0 0 1px #ffd966 inset;
         }
         .rank-silver {
             background: #1a1c22;
-            border-radius: 20px;
-            overflow: hidden;
-        }
-        .rank-gold td, .rank-silver td {
-            background: transparent;
-            border-bottom: 1px solid #2a2a3a;
-        }
-        .rank-gold td:first-child,
-        .rank-silver td:first-child {
-            border-top-left-radius: 20px;
-            border-bottom-left-radius: 20px;
-        }
-        .rank-gold td:last-child,
-        .rank-silver td:last-child {
-            border-top-right-radius: 20px;
-            border-bottom-right-radius: 20px;
+            border: 2px solid #c0c0c0;
+            border-radius: 16px;
+            box-shadow: 0 0 0 1px #c0c0c0 inset;
         }
         .player-cell {
             display: flex;
@@ -223,9 +209,9 @@
         }
         .modal-content {
             background: #11141f;
-            max-width: 700px;
+            max-width: 650px;
             width: 90%;
-            border-radius: 24px;
+            border-radius: 20px;
             border: 1px solid #324155;
             max-height: 85vh;
             overflow-y: auto;
@@ -247,88 +233,7 @@
         .modal-body {
             padding: 1.5rem;
         }
-        /* Phần thông tin chính - nằm trên */
-        .main-info {
-            background: #0c0f18;
-            border-radius: 20px;
-            padding: 1rem;
-            margin-bottom: 1.5rem;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-        .info-field {
-            flex: 1;
-            min-width: 150px;
-        }
-        .info-field label {
-            display: block;
-            font-size: 0.7rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            color: #a7b6da;
-            margin-bottom: 6px;
-        }
-        .info-field input, .info-field select {
-            width: 100%;
-            background: #1a1e2c;
-            border: 1px solid #2e364b;
-            padding: 10px 12px;
-            border-radius: 14px;
-            color: white;
-            font-family: inherit;
-            font-size: 0.85rem;
-        }
-        /* Mode rankings - nằm dưới */
-        .modes-section {
-            background: #0c0f18;
-            border-radius: 20px;
-            padding: 1rem;
-        }
-        .modes-title {
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .modes-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 12px;
-        }
-        .mode-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: #151a24;
-            padding: 6px 12px;
-            border-radius: 40px;
-        }
-        .mode-item img {
-            width: 24px;
-            height: 24px;
-            object-fit: contain;
-        }
-        .mode-item select {
-            flex: 1;
-            background: #1a1e2c;
-            border: 1px solid #2e364b;
-            border-radius: 30px;
-            padding: 6px 8px;
-            color: white;
-            font-size: 0.75rem;
-            font-family: inherit;
-            cursor: pointer;
-        }
-        .modal-footer {
-            padding: 1rem 1.5rem 1.5rem;
-            display: flex;
-            justify-content: flex-end;
-            gap: 12px;
-        }
-        /* Detail popup */
+        /* Detail style - có avatar, không khung thừa */
         .detail-simple {
             color: #ffffff;
         }
@@ -424,6 +329,84 @@
             height: 18px;
             vertical-align: middle;
         }
+        /* Add/edit form */
+        .info-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            margin-bottom: 1.8rem;
+            background: #0c0f18;
+            padding: 1rem;
+            border-radius: 20px;
+        }
+        .info-field {
+            flex: 1;
+            min-width: 150px;
+        }
+        .info-field label {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #a7b6da;
+            margin-bottom: 6px;
+        }
+        .info-field input, .info-field select {
+            width: 100%;
+            background: #1a1e2c;
+            border: 1px solid #2e364b;
+            padding: 10px 12px;
+            border-radius: 14px;
+            color: white;
+            font-family: inherit;
+            font-size: 0.85rem;
+        }
+        .modes-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin: 0 0 12px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .modes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
+            background: #0c0f18;
+            padding: 16px;
+            border-radius: 20px;
+        }
+        .mode-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #151a24;
+            padding: 6px 12px;
+            border-radius: 40px;
+        }
+        .mode-item img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
+        .mode-item select {
+            flex: 1;
+            background: #1a1e2c;
+            border: 1px solid #2e364b;
+            border-radius: 30px;
+            padding: 6px 8px;
+            color: white;
+            font-size: 0.75rem;
+            font-family: inherit;
+            cursor: pointer;
+        }
+        .modal-footer {
+            padding: 1rem 1.5rem 1.5rem;
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
         .toast {
             position: fixed;
             bottom: 20px;
@@ -448,6 +431,7 @@
         }
         @media (max-width: 780px) {
             body { padding: 1rem; }
+            .modes-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -468,21 +452,21 @@
             <thead>
                 <tr><th>Rank</th><th>Player</th><th>Region</th><th>Overall Tier</th><th>Tested Modes</th><th>Actions</th></tr>
             </thead>
-            <tbody id="tableBody"><tr class="empty-row"><td colspan="6">✨ No fighters yet. Click "Add Player" to start! ✨</td></tr></tbody>
+            <tbody id="tableBody"><tr class="empty-row"><td colspan="6">✨ No fighters yet. Click "Add Player" to start! ✨</tr></tbody>
         </table>
     </div>
     <footer>💡 Click on name/avatar to view details. Gold border = #1 overall, Silver = #2.</footer>
 </div>
 
-<!-- Modal Add/Edit -->
+<!-- Add/Edit Modal -->
 <div id="editModal" class="modal">
-    <div class="modal-content">
+    <div class="modal-content" style="max-width: 1000px;">
         <div class="modal-header">
             <button class="close-modal" id="closeEditModalBtn">&times;</button>
         </div>
         <div class="modal-body">
             <form id="playerForm">
-                <div class="main-info">
+                <div class="info-section">
                     <div class="info-field">
                         <label><i class="fas fa-signature"></i> IGN</label>
                         <input type="text" id="ignInput" placeholder="Ex: Technoblade" required>
@@ -507,10 +491,8 @@
                         </select>
                     </div>
                 </div>
-                <div class="modes-section">
-                    <div class="modes-title"><i class="fas fa-fist-raised"></i> Mode Rankings (choose tier or Untested)</div>
-                    <div class="modes-grid" id="modesGrid"></div>
-                </div>
+                <div class="modes-title"><i class="fas fa-fist-raised"></i> Mode Rankings (choose tier or Untested)</div>
+                <div class="modes-grid" id="modesGrid"></div>
                 <input type="hidden" id="editId" value="">
             </form>
         </div>
@@ -521,9 +503,9 @@
     </div>
 </div>
 
-<!-- Detail Modal -->
+<!-- Detail Modal (có avatar, căn chỉnh dòng OVERALL) -->
 <div id="detailModal" class="modal">
-    <div class="modal-content" style="max-width: 650px;">
+    <div class="modal-content">
         <div class="modal-header">
             <button class="close-modal" id="closeDetailBtn">&times;</button>
         </div>
@@ -532,7 +514,7 @@
 </div>
 
 <script>
-    // MODE DEFINITIONS (giữ nguyên)
+    // ---------- MODE DEFINITIONS ----------
     const MODES = [
         { id: "sword", name: "Sword", iconUrl: "https://media.discordapp.net/attachments/1502227983694303312/1502227983828783175/sword.png?ex=6a0ec455&is=6a0d72d5&hm=4b06b00213a4e4952bda00182688054045f9c72941a65243c5ff08dfac6c6e85&=&format=webp&quality=lossless&width=569&height=569" },
         { id: "axe", name: "Axe", iconUrl: "https://media.discordapp.net/attachments/1502227900072595476/1502227900210876437/axe.png?ex=6a0ec441&is=6a0d72c1&hm=dfce75bfd6d289edbaa635faff6334abd2c196f68117378471db73c953bb3fde&=&format=webp&quality=lossless&width=569&height=569" },
@@ -588,7 +570,7 @@
         const tbody = document.getElementById('tableBody');
         if (!tbody) return;
         if (players.length === 0) {
-            tbody.innerHTML = '<tr class="empty-row"><td colspan="6">✨ No fighters yet. Click "Add Player" to start! ✨</td></tr>';
+            tbody.innerHTML = '<tr class="empty-row"><td colspan="6">✨ No fighters yet. Click "Add Player" to start! ✨</tr>';
             return;
         }
         tbody.innerHTML = '';
@@ -640,6 +622,7 @@
         }
     }
 
+    // Detail popup có avatar, căn chỉnh dòng OVERALL
     function showDetailModal(ign) {
         const player = players.find(p => p.ign.toLowerCase() === ign.toLowerCase());
         if (!player) return;
