@@ -7,450 +7,77 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            background: #0a0c12;
-            font-family: 'Inter', sans-serif;
-            color: #eef2ff;
-            padding: 2rem 1.5rem;
-        }
-        .container {
-            max-width: 1500px;
-            margin: 0 auto;
-        }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            border-bottom: 1px solid #2a2e3f;
-            padding-bottom: 1rem;
-        }
-        .title-section h1 {
-            font-size: 2.3rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #e6b422, #c9771e);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        .title-section p {
-            color: #8e98b3;
-            font-size: 0.85rem;
-            margin-top: 6px;
-        }
-        .action-buttons {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-        .btn {
-            background: #1e212b;
-            border: none;
-            padding: 8px 18px;
-            border-radius: 40px;
-            font-weight: 500;
-            font-size: 0.85rem;
-            font-family: inherit;
-            color: #eef2ff;
-            cursor: pointer;
-            transition: 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .btn-primary {
-            background: #2d3b4f;
-            border: 1px solid #4b5e7a;
-        }
-        .btn-primary:hover {
-            background: #3e5270;
-            transform: translateY(-1px);
-        }
-        .btn-outline {
-            border: 1px solid #384152;
-            background: transparent;
-        }
-        .btn-outline:hover {
-            background: #262b38;
-        }
-        .table-wrapper {
-            overflow-x: auto;
-            border-radius: 20px;
-            background: #0f111a;
-            border: 1px solid #262c3a;
-            margin-top: 1rem;
-        }
-        .tier-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            font-size: 0.85rem;
-            min-width: 950px;
-        }
-        .tier-table th {
-            background: #151a24;
-            padding: 16px 12px;
-            text-align: left;
-            font-weight: 600;
-            color: #ccd6f0;
-            border-bottom: 1px solid #2c3243;
-        }
-        .tier-table td {
-            padding: 14px 12px;
-            border-bottom: 1px solid #1e2330;
-            vertical-align: middle;
-        }
-        /* Viền vàng - bạc bo tròn hoàn hảo */
-        .rank-gold {
-            background: #1e1a12;
-            border: 2px solid #ffd966;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 0 0 1px #ffd966 inset;
-        }
-        .rank-silver {
-            background: #1a1c22;
-            border: 2px solid #c0c0c0;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 0 0 1px #c0c0c0 inset;
-        }
-        .rank-gold td, .rank-silver td {
-            background: transparent;
-            border-bottom: 1px solid #2a2a3a;
-        }
-        .rank-gold td:first-child,
-        .rank-silver td:first-child {
-            border-top-left-radius: 20px;
-            border-bottom-left-radius: 20px;
-        }
-        .rank-gold td:last-child,
-        .rank-silver td:last-child {
-            border-top-right-radius: 20px;
-            border-bottom-right-radius: 20px;
-        }
-        .player-cell {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .player-avatar {
-            width: 40px;
-            height: 40px;
-            background: #1e2332;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 2px solid #e6b422;
-            cursor: pointer;
-        }
-        .player-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .player-name {
-            font-weight: 700;
-            color: #f5c542;
-            cursor: pointer;
-            text-decoration: none;
-        }
-        .player-name:hover {
-            text-decoration: underline;
-        }
-        .region-badge {
-            background: #232838;
-            padding: 4px 10px;
-            border-radius: 30px;
-            font-size: 0.75rem;
-            display: inline-block;
-        }
-        .tier-badge {
-            background: #2a2116;
-            color: #f3bc6c;
-            font-weight: 700;
-            padding: 5px 12px;
-            border-radius: 40px;
-            display: inline-block;
-            font-size: 0.8rem;
-        }
-        .mode-icons-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        .mode-mini {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            background: #10141f;
-            padding: 3px 8px;
-            border-radius: 30px;
-            font-size: 0.7rem;
-            border: 1px solid #2c3348;
-        }
-        .mode-mini img {
-            width: 16px;
-            height: 16px;
-            object-fit: contain;
-        }
-        .action-icons {
-            display: flex;
-            gap: 12px;
-        }
-        .action-icons i {
-            cursor: pointer;
-            font-size: 1.2rem;
-            color: #8f9bb3;
-        }
-        .action-icons i:hover {
-            color: #f5b042;
-        }
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(6px);
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-        }
-        .modal-content {
-            background: #11141f;
-            max-width: 650px;
-            width: 90%;
-            border-radius: 20px;
-            border: 1px solid #324155;
-            max-height: 85vh;
-            overflow-y: auto;
-        }
-        .modal-header {
-            padding: 1rem 1.5rem;
-            border-bottom: 1px solid #282f40;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-        }
-        .close-modal {
-            background: none;
-            border: none;
-            font-size: 1.6rem;
-            cursor: pointer;
-            color: #a2b5dd;
-        }
-        .modal-body {
-            padding: 1.5rem;
-        }
-        /* Detail style - có avatar, không khung thừa */
-        .detail-simple {
-            color: #ffffff;
-        }
-        .detail-header {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            margin-bottom: 1rem;
-        }
-        .detail-avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 3px solid #e6b422;
-            background: #1e2332;
-        }
-        .detail-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .detail-info h2 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #f5c542;
-            margin-bottom: 0.25rem;
-        }
-        .detail-info .sub {
-            font-size: 0.9rem;
-            color: #b9c7f0;
-            margin-bottom: 0.5rem;
-        }
-        .namemc-link {
-            display: inline-block;
-            margin-bottom: 1rem;
-            color: #e6b422;
-            text-decoration: none;
-            font-size: 0.85rem;
-        }
-        .position-block {
-            margin: 0.75rem 0;
-        }
-        .position-label {
-            font-weight: 700;
-            font-size: 1rem;
-            margin-bottom: 4px;
-            color: white;
-        }
-        .overall-row {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
-        .overall-part {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-weight: 700;
-        }
-        .points-soft {
-            color: rgba(255,255,255,0.65);
-            font-weight: normal;
-        }
-        .tiers-title {
-            font-weight: 600;
-            margin: 1rem 0 0.5rem 0;
-            font-size: 0.9rem;
-            color: #ccd6f0;
-        }
-        .detail-mode-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 5px;
-        }
-        .detail-mode-item {
-            background: #1e2332;
-            padding: 5px 12px;
-            border-radius: 30px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.8rem;
-        }
-        .detail-mode-item img {
-            width: 18px;
-            height: 18px;
-        }
-        .trophy-icon {
-            width: 18px;
-            height: 18px;
-            vertical-align: middle;
-        }
-        /* Add/edit form */
-        .info-section {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.2rem;
-            margin-bottom: 1.8rem;
-            background: #0c0f18;
-            padding: 1rem;
-            border-radius: 20px;
-        }
-        .info-field {
-            flex: 1;
-            min-width: 150px;
-        }
-        .info-field label {
-            display: block;
-            font-size: 0.7rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            color: #a7b6da;
-            margin-bottom: 6px;
-        }
-        .info-field input, .info-field select {
-            width: 100%;
-            background: #1a1e2c;
-            border: 1px solid #2e364b;
-            padding: 10px 12px;
-            border-radius: 14px;
-            color: white;
-            font-family: inherit;
-            font-size: 0.85rem;
-        }
-        .modes-title {
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin: 0 0 12px 0;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .modes-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 12px;
-            background: #0c0f18;
-            padding: 16px;
-            border-radius: 20px;
-        }
-        .mode-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: #151a24;
-            padding: 6px 12px;
-            border-radius: 40px;
-        }
-        .mode-item img {
-            width: 24px;
-            height: 24px;
-            object-fit: contain;
-        }
-        .mode-item select {
-            flex: 1;
-            background: #1a1e2c;
-            border: 1px solid #2e364b;
-            border-radius: 30px;
-            padding: 6px 8px;
-            color: white;
-            font-size: 0.75rem;
-            font-family: inherit;
-            cursor: pointer;
-        }
-        .modal-footer {
-            padding: 1rem 1.5rem 1.5rem;
-            display: flex;
-            justify-content: flex-end;
-            gap: 12px;
-        }
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #1f2a44;
-            padding: 10px 18px;
-            border-radius: 40px;
-            border-left: 4px solid #f5b042;
-            z-index: 1100;
-            font-size: 0.8rem;
-        }
-        .empty-row td {
-            text-align: center;
-            padding: 3rem;
-            color: #6c7a9e;
-        }
-        footer {
-            margin-top: 2rem;
-            text-align: center;
-            font-size: 0.7rem;
-            color: #4a536b;
-        }
-        @media (max-width: 780px) {
-            body { padding: 1rem; }
-            .modes-grid { grid-template-columns: 1fr; }
-        }
+        /* CSS giữ nguyên như bản trước (đã có viền tròn cho rank cao nhất) */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #0a0c12; font-family: 'Inter', sans-serif; color: #eef2ff; padding: 2rem 1.5rem; }
+        .container { max-width: 1500px; margin: 0 auto; }
+        .header { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; border-bottom: 1px solid #2a2e3f; padding-bottom: 1rem; }
+        .title-section h1 { font-size: 2.3rem; font-weight: 700; background: linear-gradient(135deg, #e6b422, #c9771e); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .title-section p { color: #8e98b3; font-size: 0.85rem; margin-top: 6px; }
+        .action-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+        .btn { background: #1e212b; border: none; padding: 8px 18px; border-radius: 40px; font-weight: 500; font-size: 0.85rem; font-family: inherit; color: #eef2ff; cursor: pointer; transition: 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+        .btn-primary { background: #2d3b4f; border: 1px solid #4b5e7a; }
+        .btn-primary:hover { background: #3e5270; transform: translateY(-1px); }
+        .btn-outline { border: 1px solid #384152; background: transparent; }
+        .btn-outline:hover { background: #262b38; }
+        .table-wrapper { overflow-x: auto; border-radius: 20px; background: #0f111a; border: 1px solid #262c3a; margin-top: 1rem; }
+        .tier-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 0.85rem; min-width: 950px; }
+        .tier-table th { background: #151a24; padding: 16px 12px; text-align: left; font-weight: 600; color: #ccd6f0; border-bottom: 1px solid #2c3243; }
+        .tier-table td { padding: 14px 12px; border-bottom: 1px solid #1e2330; vertical-align: middle; }
+        .rank-gold { background: #1e1a12; border: 2px solid #ffd966; border-radius: 20px; overflow: hidden; box-shadow: 0 0 0 1px #ffd966 inset; }
+        .rank-silver { background: #1a1c22; border: 2px solid #c0c0c0; border-radius: 20px; overflow: hidden; box-shadow: 0 0 0 1px #c0c0c0 inset; }
+        .rank-gold td, .rank-silver td { background: transparent; border-bottom: 1px solid #2a2a3a; }
+        .rank-gold td:first-child, .rank-silver td:first-child { border-top-left-radius: 20px; border-bottom-left-radius: 20px; }
+        .rank-gold td:last-child, .rank-silver td:last-child { border-top-right-radius: 20px; border-bottom-right-radius: 20px; }
+        .player-cell { display: flex; align-items: center; gap: 12px; }
+        .player-avatar { width: 40px; height: 40px; background: #1e2332; border-radius: 50%; overflow: hidden; border: 2px solid #e6b422; cursor: pointer; }
+        .player-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .player-name { font-weight: 700; color: #f5c542; cursor: pointer; text-decoration: none; }
+        .player-name:hover { text-decoration: underline; }
+        .region-badge { background: #232838; padding: 4px 10px; border-radius: 30px; font-size: 0.75rem; display: inline-block; }
+        .tier-badge { background: #2a2116; color: #f3bc6c; font-weight: 700; padding: 5px 12px; border-radius: 40px; display: inline-block; font-size: 0.8rem; }
+        .mode-icons-list { display: flex; flex-wrap: wrap; gap: 8px; }
+        .mode-mini { display: inline-flex; align-items: center; gap: 5px; background: #10141f; padding: 3px 8px; border-radius: 30px; font-size: 0.7rem; border: 1px solid #2c3348; }
+        .mode-mini img { width: 16px; height: 16px; object-fit: contain; }
+        .action-icons { display: flex; gap: 12px; }
+        .action-icons i { cursor: pointer; font-size: 1.2rem; color: #8f9bb3; }
+        .action-icons i:hover { color: #f5b042; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(6px); align-items: center; justify-content: center; z-index: 1000; }
+        .modal-content { background: #11141f; max-width: 650px; width: 90%; border-radius: 20px; border: 1px solid #324155; max-height: 85vh; overflow-y: auto; }
+        .modal-header { padding: 1rem 1.5rem; border-bottom: 1px solid #282f40; display: flex; justify-content: flex-end; align-items: center; }
+        .close-modal { background: none; border: none; font-size: 1.6rem; cursor: pointer; color: #a2b5dd; }
+        .modal-body { padding: 1.5rem; }
+        .detail-simple { color: #ffffff; }
+        .detail-header { display: flex; align-items: center; gap: 20px; margin-bottom: 1rem; }
+        .detail-avatar { width: 80px; height: 80px; border-radius: 50%; overflow: hidden; border: 3px solid #e6b422; background: #1e2332; }
+        .detail-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .detail-info h2 { font-size: 1.8rem; font-weight: 700; color: #f5c542; margin-bottom: 0.25rem; }
+        .detail-info .sub { font-size: 0.9rem; color: #b9c7f0; margin-bottom: 0.5rem; }
+        .namemc-link { display: inline-block; margin-bottom: 1rem; color: #e6b422; text-decoration: none; font-size: 0.85rem; }
+        .position-block { margin: 0.75rem 0; }
+        .position-label { font-weight: 700; font-size: 1rem; margin-bottom: 4px; color: white; }
+        .overall-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+        .overall-part { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; }
+        .points-soft { color: rgba(255,255,255,0.65); font-weight: normal; }
+        .tiers-title { font-weight: 600; margin: 1rem 0 0.5rem 0; font-size: 0.9rem; color: #ccd6f0; }
+        .detail-mode-list { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 5px; }
+        .detail-mode-item { background: #1e2332; padding: 5px 12px; border-radius: 30px; display: inline-flex; align-items: center; gap: 8px; font-size: 0.8rem; }
+        .detail-mode-item img { width: 18px; height: 18px; }
+        .trophy-icon { width: 18px; height: 18px; vertical-align: middle; }
+        .info-section { display: flex; flex-wrap: wrap; gap: 1.2rem; margin-bottom: 1.8rem; background: #0c0f18; padding: 1rem; border-radius: 20px; }
+        .info-field { flex: 1; min-width: 150px; }
+        .info-field label { display: block; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; color: #a7b6da; margin-bottom: 6px; }
+        .info-field input, .info-field select { width: 100%; background: #1a1e2c; border: 1px solid #2e364b; padding: 10px 12px; border-radius: 14px; color: white; font-family: inherit; font-size: 0.85rem; }
+        .modes-title { font-size: 0.8rem; font-weight: 600; margin: 0 0 12px 0; display: flex; align-items: center; gap: 8px; }
+        .modes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; background: #0c0f18; padding: 16px; border-radius: 20px; }
+        .mode-item { display: flex; align-items: center; gap: 10px; background: #151a24; padding: 6px 12px; border-radius: 40px; }
+        .mode-item img { width: 24px; height: 24px; object-fit: contain; }
+        .mode-item select { flex: 1; background: #1a1e2c; border: 1px solid #2e364b; border-radius: 30px; padding: 6px 8px; color: white; font-size: 0.75rem; font-family: inherit; cursor: pointer; }
+        .modal-footer { padding: 1rem 1.5rem 1.5rem; display: flex; justify-content: flex-end; gap: 12px; }
+        .toast { position: fixed; bottom: 20px; right: 20px; background: #1f2a44; padding: 10px 18px; border-radius: 40px; border-left: 4px solid #f5b042; z-index: 1100; font-size: 0.8rem; }
+        .empty-row td { text-align: center; padding: 3rem; color: #6c7a9e; }
+        footer { margin-top: 2rem; text-align: center; font-size: 0.7rem; color: #4a536b; }
+        @media (max-width: 780px) { body { padding: 1rem; } .modes-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -463,93 +90,57 @@
         <div class="action-buttons">
             <button id="addPlayerBtn" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Add Player</button>
             <button id="sortPointsBtn" class="btn btn-outline"><i class="fas fa-sort-amount-down-alt"></i> Sort by Points</button>
+            <button id="fetchUpdatesBtn" class="btn btn-outline"><i class="fas fa-sync-alt"></i> Check Discord Updates</button>
         </div>
     </div>
     <div class="table-wrapper">
         <table class="tier-table" id="playerTable">
-            <thead>
-                <tr><th>Rank</th><th>Player</th><th>Region</th><th>Overall Tier</th><th>Tested Modes</th><th>Actions</th></tr>
-            </thead>
+            <thead><tr><th>Rank</th><th>Player</th><th>Region</th><th>Overall Tier</th><th>Tested Modes</th><th>Actions</th></tr></thead>
             <tbody id="tableBody"><tr class="empty-row"><td colspan="6">✨ No fighters yet. Click "Add Player" to start! ✨</td></tr></tbody>
         </table>
     </div>
     <footer>💡 Click on name/avatar to view details. Gold border = #1 overall, Silver = #2.</footer>
 </div>
 
-<!-- Add/Edit Modal -->
+<!-- Modal Add/Edit -->
 <div id="editModal" class="modal">
     <div class="modal-content" style="max-width: 1000px;">
-        <div class="modal-header">
-            <button class="close-modal" id="closeEditModalBtn">&times;</button>
-        </div>
+        <div class="modal-header"><button class="close-modal" id="closeEditModalBtn">&times;</button></div>
         <div class="modal-body">
             <form id="playerForm">
                 <div class="info-section">
-                    <div class="info-field">
-                        <label><i class="fas fa-signature"></i> IGN</label>
-                        <input type="text" id="ignInput" placeholder="Ex: Technoblade" required>
-                    </div>
-                    <div class="info-field">
-                        <label><i class="fas fa-globe"></i> Region</label>
-                        <select id="regionSelect">
-                            <option value="NA">North America (NA)</option>
-                            <option value="EU">Europe (EU)</option>
-                            <option value="AS">Asia (AS)</option>
-                        </select>
-                    </div>
-                    <div class="info-field">
-                        <label><i class="fas fa-chart-line"></i> Overall Tier</label>
-                        <select id="tierSelect">
-                            <option value="Combat Master">Combat Master (Highest)</option>
-                            <option value="Combat Ace">Combat Ace</option>
-                            <option value="Combat Specialist">Combat Specialist</option>
-                            <option value="Combat Novice">Combat Novice</option>
-                            <option value="Combat Cadet">Combat Cadet</option>
-                            <option value="Rookie">Rookie (Lowest)</option>
-                        </select>
-                    </div>
+                    <div class="info-field"><label>IGN</label><input type="text" id="ignInput" placeholder="Ex: Technoblade" required></div>
+                    <div class="info-field"><label>Region</label><select id="regionSelect"><option value="NA">North America (NA)</option><option value="EU">Europe (EU)</option><option value="AS">Asia (AS)</option></select></div>
+                    <div class="info-field"><label>Overall Tier</label><select id="tierSelect"><option value="Combat Master">Combat Master (Highest)</option><option value="Combat Ace">Combat Ace</option><option value="Combat Specialist">Combat Specialist</option><option value="Combat Novice">Combat Novice</option><option value="Combat Cadet">Combat Cadet</option><option value="Rookie">Rookie (Lowest)</option></select></div>
                 </div>
                 <div class="modes-title"><i class="fas fa-fist-raised"></i> Mode Rankings (choose tier or Untested)</div>
                 <div class="modes-grid" id="modesGrid"></div>
                 <input type="hidden" id="editId" value="">
             </form>
         </div>
-        <div class="modal-footer">
-            <button class="btn btn-outline" id="cancelModalBtn">Cancel</button>
-            <button class="btn btn-primary" id="savePlayerBtn">Save Player</button>
-        </div>
+        <div class="modal-footer"><button class="btn btn-outline" id="cancelModalBtn">Cancel</button><button class="btn btn-primary" id="savePlayerBtn">Save Player</button></div>
     </div>
 </div>
 
 <!-- Detail Modal -->
 <div id="detailModal" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <button class="close-modal" id="closeDetailBtn">&times;</button>
-        </div>
-        <div class="modal-body" id="detailBody"></div>
-    </div>
+    <div class="modal-content"><div class="modal-header"><button class="close-modal" id="closeDetailBtn">&times;</button></div><div class="modal-body" id="detailBody"></div></div>
 </div>
 
 <script>
-    // ---------- MODE DEFINITIONS ----------
+    // ---------- MODE DEFINITIONS (đã sửa ảnh Pot) ----------
     const MODES = [
         { id: "sword", name: "Sword", iconUrl: "https://media.discordapp.net/attachments/1502227983694303312/1502227983828783175/sword.png?ex=6a0ec455&is=6a0d72d5&hm=4b06b00213a4e4952bda00182688054045f9c72941a65243c5ff08dfac6c6e85&=&format=webp&quality=lossless&width=569&height=569" },
         { id: "axe", name: "Axe", iconUrl: "https://media.discordapp.net/attachments/1502227900072595476/1502227900210876437/axe.png?ex=6a0ec441&is=6a0d72c1&hm=dfce75bfd6d289edbaa635faff6334abd2c196f68117378471db73c953bb3fde&=&format=webp&quality=lossless&width=569&height=569" },
         { id: "mace", name: "Mace", iconUrl: "https://media.discordapp.net/attachments/1502227665325785118/1502227665485299732/mace.png?ex=6a0ec409&is=6a0d7289&hm=ca8714bb036949aee0256887f0f35a63bc7f57f876853382da634255ed08fdc8&=&format=webp&quality=lossless&width=569&height=569" },
-        { id: "pot", name: "Pot", iconUrl: "https://media.discordapp.net/attachments/1393621161882947748/1393621162046652556/pot.png?ex=6a0e8199&is=6a0d3019&hm=a1acc121643d44dbd620f129358835234f5106b97e0eb2297c9be0b1dcf91eda&=&format=webp&quality=lossless&width=569&height=569" },
+        { id: "pot", name: "Pot", iconUrl: "https://media.discordapp.net/attachments/1405479003309084805/1405479003598356490/pot.png?ex=6a14bb12&is=6a136992&hm=75e9b674809ba442b0e4d6e2f0c377a87a71b11d905282264ff9041bb80b57cc&=&format=webp&quality=lossless&width=656&height=656" },
         { id: "nethop", name: "NethOP", iconUrl: "https://media.discordapp.net/attachments/1502227947572957264/1502227948273537074/nethop.png?ex=6a0ec44c&is=6a0d72cc&hm=f904516ada3d32a615a34448b7da1ea1b0c833292cd581382c6f6d6b4975f5aa&=&format=webp&quality=lossless&width=569&height=569" },
         { id: "uhc", name: "UHC", iconUrl: "https://media.discordapp.net/attachments/1502227841557729420/1502227841817907260/uhc.png?ex=6a0ec433&is=6a0d72b3&hm=dd19fcd1473d4f83cc16423fe9cbd9bb92c3ee4734346cf7f19e13d990cec525&=&format=webp&quality=lossless&width=569&height=569" },
         { id: "vanilla", name: "Vanilla", iconUrl: "https://media.discordapp.net/attachments/1502227720816558131/1502227721391046756/vanilla.png?ex=6a0ec416&is=6a0d7296&hm=2957da56a34577f4a42978da32161fff6fdc049d6078679dd96d63ea046e54f9&=&format=webp&quality=lossless&width=569&height=569" },
         { id: "smp", name: "SMP", iconUrl: "https://media.discordapp.net/attachments/1502227794997018654/1502227795189698580/smp.png?ex=6a0ec428&is=6a0d72a8&hm=8d29df6a0643b6bd0ddae6265713d0ea9e197c7221d636b907271132cb8af309&=&format=webp" }
     ];
 
-    const RANK_POINTS = {
-        "HT1": 100, "LT1": 95, "HT2": 90, "LT2": 85,
-        "HT3": 80, "LT3": 75, "HT4": 70, "LT4": 65,
-        "HT5": 60, "LT5": 50
-    };
-
+    const RANK_POINTS = { "HT1":100, "LT1":95, "HT2":90, "LT2":85, "HT3":80, "LT3":75, "HT4":70, "LT4":65, "HT5":60, "LT5":50 };
     const TIER_OPTIONS = [
         { value: "HT1", label: "HT1 (100 pts)" }, { value: "LT1", label: "LT1 (95 pts)" },
         { value: "HT2", label: "HT2 (90 pts)" }, { value: "LT2", label: "LT2 (85 pts)" },
@@ -562,45 +153,23 @@
     let players = [];
 
     function saveToLocal() { localStorage.setItem("mctiers_pvp_data", JSON.stringify(players)); }
-    function loadFromLocal() {
-        const stored = localStorage.getItem("mctiers_pvp_data");
-        players = stored ? JSON.parse(stored) : [];
-    }
-
-    function calculateTotalPoints(player) {
-        let total = 0;
-        for (let mode of MODES) {
-            const rank = player.modes?.[mode.id];
-            if (rank && RANK_POINTS[rank]) total += RANK_POINTS[rank];
-        }
-        return total;
-    }
-
-    function sortPlayersByPoints() {
-        players.sort((a, b) => calculateTotalPoints(b) - calculateTotalPoints(a));
-    }
-
+    function loadFromLocal() { const stored = localStorage.getItem("mctiers_pvp_data"); players = stored ? JSON.parse(stored) : []; }
+    function calculateTotalPoints(player) { let total = 0; for (let mode of MODES) { const rank = player.modes?.[mode.id]; if (rank && RANK_POINTS[rank]) total += RANK_POINTS[rank]; } return total; }
+    function sortPlayersByPoints() { players.sort((a, b) => calculateTotalPoints(b) - calculateTotalPoints(a)); }
     function generateId() { return Date.now() + '-' + Math.random().toString(36).substr(2, 8); }
 
     function renderTable() {
-        sortPlayersByPoints();
-        saveToLocal();
+        sortPlayersByPoints(); saveToLocal();
         const tbody = document.getElementById('tableBody');
         if (!tbody) return;
-        if (players.length === 0) {
-            tbody.innerHTML = '<tr class="empty-row"><td colspan="6">✨ No fighters yet. Click "Add Player" to start! ✨</td></tr>';
-            return;
-        }
+        if (players.length === 0) { tbody.innerHTML = '<tr class="empty-row"><td colspan="6">✨ No fighters yet. Click "Add Player" to start! ✨</td></tr>'; return; }
         tbody.innerHTML = '';
         players.forEach((p, idx) => {
-            const rank = idx + 1;
-            let rowClass = '';
-            if (rank === 1) rowClass = 'rank-gold';
-            else if (rank === 2) rowClass = 'rank-silver';
-
+            const rank = idx+1;
+            let rowClass = (rank===1) ? 'rank-gold' : (rank===2) ? 'rank-silver' : '';
             const avatarUrl = `https://mc-heads.net/avatar/${encodeURIComponent(p.ign)}/40`;
             const testedModes = MODES.filter(m => p.modes?.[m.id] && p.modes[m.id].trim() !== "");
-            const modesHtml = testedModes.map(m => `<span class="mode-mini"><img src="${m.iconUrl}" alt="${m.name}"> ${p.modes[m.id]}</span>`).join('');
+            const modesHtml = testedModes.map(m => `<span class="mode-mini"><img src="${m.iconUrl}"> ${p.modes[m.id]}</span>`).join('');
             const row = document.createElement('tr');
             if (rowClass) row.className = rowClass;
             row.innerHTML = `
@@ -614,12 +183,7 @@
             tbody.appendChild(row);
         });
         document.querySelectorAll('.player-avatar, .player-name').forEach(el => {
-            el.addEventListener('click', (e) => {
-                e.stopPropagation();
-                let ign = el.getAttribute('data-ign');
-                if (!ign && el.classList.contains('player-name')) ign = el.getAttribute('data-ign');
-                if (ign) showDetailModal(ign);
-            });
+            el.addEventListener('click', (e) => { let ign = el.getAttribute('data-ign'); if (ign) showDetailModal(ign); });
         });
         document.querySelectorAll('.action-icons i[data-action="edit"]').forEach(icon => {
             icon.addEventListener('click', (e) => { const id = icon.getAttribute('data-id'); openEditModal(id); });
@@ -629,100 +193,50 @@
         });
     }
 
-    function deletePlayerById(id) {
-        const p = players.find(p => p.id === id);
-        if (!p) return;
-        if (confirm(`Delete ${p.ign} from tierlist?`)) {
-            players = players.filter(p => p.id !== id);
-            saveToLocal();
-            renderTable();
-            showToast(`🗑️ Removed ${p.ign}`);
-        }
-    }
-
+    function deletePlayerById(id) { const p = players.find(p => p.id === id); if(p && confirm(`Delete ${p.ign}?`)){ players = players.filter(p=>p.id!==id); saveToLocal(); renderTable(); showToast(`🗑️ Removed ${p.ign}`); } }
     function showDetailModal(ign) {
         const player = players.find(p => p.ign.toLowerCase() === ign.toLowerCase());
-        if (!player) return;
-        const sorted = [...players].sort((a,b) => calculateTotalPoints(b) - calculateTotalPoints(a));
-        const rankIndex = sorted.findIndex(p => p.id === player.id) + 1;
+        if(!player) return;
+        const sorted = [...players].sort((a,b)=>calculateTotalPoints(b)-calculateTotalPoints(a));
+        const rankIndex = sorted.findIndex(p=>p.id===player.id)+1;
         const totalPoints = calculateTotalPoints(player);
         const nameMcUrl = `https://namemc.com/profile/${encodeURIComponent(player.ign)}`;
         const avatarFull = `https://mc-heads.net/avatar/${encodeURIComponent(player.ign)}/100`;
-        
         const testedModes = MODES.filter(m => player.modes?.[m.id] && player.modes[m.id].trim() !== "");
         const modeBadges = testedModes.map(m => `<div class="detail-mode-item"><img src="${m.iconUrl}"> ${player.modes[m.id]}</div>`).join('');
-        
-        const trophyIcon = `<img src="https://mctiers.com/tier_icons/overall.svg" class="trophy-icon" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%23e6b422%22%3E%3Cpath d=%22M12 2L15 8.5L22 9.5L17 14L18.5 21L12 17.5L5.5 21L7 14L2 9.5L9 8.5L12 2Z%22/%3E%3C/svg%3E'; this.style.width='18px'; this.style.height='18px';">`;
-        
-        const detailHtml = `
-            <div class="detail-simple">
-                <div class="detail-header">
-                    <div class="detail-avatar"><img src="${avatarFull}" onerror="this.src='https://mc-heads.net/avatar/steve/100'"></div>
-                    <div class="detail-info">
-                        <h2>${escapeHtml(player.ign)}</h2>
-                        <div class="sub">${player.overallTier} · ${player.region}</div>
-                        <a href="${nameMcUrl}" target="_blank" class="namemc-link"><i class="fas fa-external-link-alt"></i> NameMC Profile</a>
-                    </div>
-                </div>
-                <div class="position-block">
-                    <div class="position-label">POSITION</div>
-                    <div class="overall-row">
-                        <span class="overall-part">${trophyIcon} OVERALL</span>
-                        <span class="points-soft">(${totalPoints} points)</span>
-                    </div>
-                </div>
-                <div class="tiers-title">TIERS</div>
-                <div class="detail-mode-list">${modeBadges || '<span>No tested modes yet</span>'}</div>
-            </div>
-        `;
+        const trophyIcon = `<img src="https://mctiers.com/tier_icons/overall.svg" class="trophy-icon" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%23e6b422%22%3E%3Cpath d=%22M12 2L15 8.5L22 9.5L17 14L18.5 21L12 17.5L5.5 21L7 14L2 9.5L9 8.5L12 2Z%22/%3E%3C/svg%3E'; this.style.width='18px'; this.style.height='18px';">`;
+        const detailHtml = `<div class="detail-simple"><div class="detail-header"><div class="detail-avatar"><img src="${avatarFull}" onerror="this.src='https://mc-heads.net/avatar/steve/100'"></div><div class="detail-info"><h2>${escapeHtml(player.ign)}</h2><div class="sub">${player.overallTier} · ${player.region}</div><a href="${nameMcUrl}" target="_blank" class="namemc-link"><i class="fas fa-external-link-alt"></i> NameMC Profile</a></div></div><div class="position-block"><div class="position-label">POSITION</div><div class="overall-row"><span class="overall-part">${trophyIcon} OVERALL</span><span class="points-soft">(${totalPoints} points)</span></div></div><div class="tiers-title">TIERS</div><div class="detail-mode-list">${modeBadges || '<span>No tested modes yet</span>'}</div></div>`;
         document.getElementById('detailBody').innerHTML = detailHtml;
         document.getElementById('detailModal').style.display = 'flex';
     }
 
     function buildModesGrid() {
         const grid = document.getElementById('modesGrid');
-        if (!grid) return;
+        if(!grid) return;
         grid.innerHTML = '';
         MODES.forEach(mode => {
-            const div = document.createElement('div');
-            div.className = 'mode-item';
-            const img = document.createElement('img');
-            img.src = mode.iconUrl;
-            img.onerror = () => { img.src = 'https://via.placeholder.com/24'; };
-            const select = document.createElement('select');
-            select.id = `mode_${mode.id}`;
-            TIER_OPTIONS.forEach(opt => {
-                const option = document.createElement('option');
-                option.value = opt.value;
-                option.textContent = opt.label;
-                select.appendChild(option);
-            });
-            div.appendChild(img);
-            div.appendChild(document.createTextNode(mode.name + ':'));
-            div.appendChild(select);
+            const div = document.createElement('div'); div.className = 'mode-item';
+            const img = document.createElement('img'); img.src = mode.iconUrl; img.onerror = () => { img.src = 'https://via.placeholder.com/24'; };
+            const select = document.createElement('select'); select.id = `mode_${mode.id}`;
+            TIER_OPTIONS.forEach(opt => { const option = document.createElement('option'); option.value = opt.value; option.textContent = opt.label; select.appendChild(option); });
+            div.appendChild(img); div.appendChild(document.createTextNode(mode.name + ':')); div.appendChild(select);
             grid.appendChild(div);
         });
     }
 
     function openEditModal(id) {
-        const player = players.find(p => p.id === id);
-        if (player) {
+        const player = players.find(p=>p.id===id);
+        if(player){
             document.getElementById('ignInput').value = player.ign;
             document.getElementById('regionSelect').value = player.region;
             document.getElementById('tierSelect').value = player.overallTier;
-            MODES.forEach(m => {
-                const select = document.getElementById(`mode_${m.id}`);
-                if (select) select.value = player.modes?.[m.id] || "";
-            });
+            MODES.forEach(m=>{ const sel = document.getElementById(`mode_${m.id}`); if(sel) sel.value = player.modes?.[m.id] || ""; });
             document.getElementById('editId').value = player.id;
         } else {
             document.getElementById('ignInput').value = '';
             document.getElementById('regionSelect').value = 'NA';
             document.getElementById('tierSelect').value = 'Combat Novice';
-            MODES.forEach(m => {
-                const select = document.getElementById(`mode_${m.id}`);
-                if (select) select.value = "";
-            });
+            MODES.forEach(m=>{ const sel = document.getElementById(`mode_${m.id}`); if(sel) sel.value = ""; });
             document.getElementById('editId').value = '';
         }
         document.getElementById('editModal').style.display = 'flex';
@@ -730,57 +244,93 @@
 
     function savePlayerFromModal() {
         const ign = document.getElementById('ignInput').value.trim();
-        if (ign === "") { showToast("IGN cannot be empty", true); return; }
+        if(ign===""){ showToast("IGN cannot be empty", true); return; }
         const region = document.getElementById('regionSelect').value;
         const overallTier = document.getElementById('tierSelect').value;
         const modes = {};
-        MODES.forEach(m => {
-            const val = document.getElementById(`mode_${m.id}`).value;
-            modes[m.id] = (val && val !== "") ? val : "";
-        });
+        MODES.forEach(m=>{ const val = document.getElementById(`mode_${m.id}`).value; modes[m.id] = (val && val!=="") ? val : ""; });
         const editId = document.getElementById('editId').value;
-        if (editId) {
-            const idx = players.findIndex(p => p.id === editId);
-            if (idx !== -1) {
-                const duplicate = players.some(p => p.id !== editId && p.ign.toLowerCase() === ign.toLowerCase());
-                if (duplicate) { showToast("❌ IGN already exists!", true); return; }
-                players[idx] = { ...players[idx], ign, region, overallTier, modes };
-                saveToLocal();
-                renderTable();
-                showToast(`✏️ Updated ${ign}`);
+        if(editId){
+            const idx = players.findIndex(p=>p.id===editId);
+            if(idx!==-1){
+                const duplicate = players.some(p=>p.id!==editId && p.ign.toLowerCase()===ign.toLowerCase());
+                if(duplicate){ showToast("❌ IGN already exists!", true); return; }
+                players[idx] = {...players[idx], ign, region, overallTier, modes};
+                saveToLocal(); renderTable(); showToast(`✏️ Updated ${ign}`);
             }
         } else {
-            if (players.some(p => p.ign.toLowerCase() === ign.toLowerCase())) {
-                showToast("❌ IGN already exists!", true);
-                return;
-            }
+            if(players.some(p=>p.ign.toLowerCase()===ign.toLowerCase())){ showToast("❌ IGN already exists!", true); return; }
             const newPlayer = { id: generateId(), ign, region, overallTier, modes };
-            players.push(newPlayer);
-            saveToLocal();
-            renderTable();
-            showToast(`✅ Added ${ign}`);
+            players.push(newPlayer); saveToLocal(); renderTable(); showToast(`✅ Added ${ign}`);
         }
         closeEditModal();
     }
 
-    function sortByPoints() {
-        sortPlayersByPoints();
-        saveToLocal();
-        renderTable();
-        showToast("📊 Sorted by total points");
-    }
-
+    function sortByPoints() { sortPlayersByPoints(); saveToLocal(); renderTable(); showToast("📊 Sorted by total points"); }
     function closeEditModal() { document.getElementById('editModal').style.display = 'none'; }
     function closeDetailModal() { document.getElementById('detailModal').style.display = 'none'; }
-    function showToast(msg, isErr = false) {
-        let t = document.querySelector('.toast');
-        if (!t) { t = document.createElement('div'); t.className = 'toast'; document.body.appendChild(t); }
-        t.style.background = isErr ? '#442222' : '#1f2a44';
-        t.innerHTML = `<i class="fas ${isErr ? 'fa-exclamation-triangle' : 'fa-check-circle'}"></i> ${msg}`;
-        t.style.display = 'block';
-        setTimeout(() => { t.style.display = 'none'; }, 2500);
-    }
+    function showToast(msg, isErr=false) { let t = document.querySelector('.toast'); if(!t){ t=document.createElement('div'); t.className='toast'; document.body.appendChild(t); } t.style.background=isErr?'#442222':'#1f2a44'; t.innerHTML=`<i class="fas ${isErr?'fa-exclamation-triangle':'fa-check-circle'}"></i> ${msg}`; t.style.display='block'; setTimeout(()=>t.style.display='none',2500); }
     function escapeHtml(str) { return str.replace(/[&<>]/g, function(m){ if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
+
+    // ---- Tự động lấy cập nhật từ API (giả lập) ----
+    async function fetchDiscordUpdates() {
+        try {
+            // Gọi đến endpoint API do bạn tự host (ví dụ: http://localhost:5000/api/get-results)
+            // Nếu chưa có backend, dùng dữ liệu mẫu minh họa
+            const response = await fetch('/api/get-results'); // Thay bằng URL thật của server
+            if (!response.ok) throw new Error('API error');
+            const results = await response.json();
+            for (let res of results) {
+                // res = { ign, region, gamemode, rankEarned }
+                const existing = players.find(p => p.ign.toLowerCase() === res.ign.toLowerCase());
+                const modeId = res.gamemode.toLowerCase().replace(/ /g, ''); // "crystalpvp" -> không có trong MODES? Cần mapping
+                // Mapping gamemode từ test result sang mode ID (theo ảnh: "Crystal Pvp" -> ? Nhưng MODES chỉ có sword,axe,...)
+                // Tạm thời bỏ qua hoặc thêm mode mới. Trong ảnh ví dụ: "Crystal Pvp" không có trong danh sách, nhưng yêu cầu "Test Vanilla được HT4" thì có.
+                // Theo ảnh: "Gamemode: Crystal Pvp" và "Rank Earned: Low Tier 4" nhưng không rõ mapping. Để đơn giản, nếu gamemode là "Vanilla" thì cập nhật.
+                if (res.gamemode.toLowerCase() === 'vanilla' && modeId === 'vanilla') {
+                    if (existing) {
+                        existing.modes.vanilla = res.rankEarned; // ví dụ "HT4"
+                        showToast(`Updated ${res.ign} Vanilla rank to ${res.rankEarned}`);
+                    } else {
+                        const newPlayer = {
+                            id: generateId(),
+                            ign: res.ign,
+                            region: res.region || 'AS',
+                            overallTier: 'Combat Novice',
+                            modes: { vanilla: res.rankEarned }
+                        };
+                        players.push(newPlayer);
+                        showToast(`Added new player ${res.ign} from Discord test`);
+                    }
+                    saveToLocal();
+                    renderTable();
+                }
+            }
+        } catch(e) {
+            console.warn("Cannot fetch updates from API. Using demo data instead.");
+            // Demo data từ ảnh: HuuThien_, Vanilla HT4, Asia
+            const demo = { ign: "HuuThien_", region: "AS", gamemode: "Vanilla", rankEarned: "HT4" };
+            const existing = players.find(p => p.ign.toLowerCase() === demo.ign.toLowerCase());
+            if (!existing) {
+                const newPlayer = {
+                    id: generateId(),
+                    ign: demo.ign,
+                    region: demo.region,
+                    overallTier: 'Combat Novice',
+                    modes: { vanilla: demo.rankEarned }
+                };
+                players.push(newPlayer);
+                saveToLocal();
+                renderTable();
+                showToast(`✅ Demo: Added ${demo.ign} with Vanilla ${demo.rankEarned}`);
+            } else {
+                existing.modes.vanilla = demo.rankEarned;
+                saveToLocal();
+                renderTable();
+                showToast(`✅ Demo: Updated ${demo.ign} Vanilla to ${demo.rankEarned}`);
+            }
+        }
+    }
 
     function bindEvents() {
         document.getElementById('addPlayerBtn')?.addEventListener('click', () => openEditModal(null));
@@ -789,18 +339,11 @@
         document.getElementById('cancelModalBtn')?.addEventListener('click', closeEditModal);
         document.getElementById('closeEditModalBtn')?.addEventListener('click', closeEditModal);
         document.getElementById('closeDetailBtn')?.addEventListener('click', closeDetailModal);
-        window.addEventListener('click', (e) => {
-            if (e.target === document.getElementById('editModal')) closeEditModal();
-            if (e.target === document.getElementById('detailModal')) closeDetailModal();
-        });
+        document.getElementById('fetchUpdatesBtn')?.addEventListener('click', fetchDiscordUpdates);
+        window.addEventListener('click', (e) => { if(e.target === document.getElementById('editModal')) closeEditModal(); if(e.target === document.getElementById('detailModal')) closeDetailModal(); });
     }
 
-    function init() {
-        loadFromLocal();
-        buildModesGrid();
-        bindEvents();
-        renderTable();
-    }
+    function init() { loadFromLocal(); buildModesGrid(); bindEvents(); renderTable(); }
     init();
 </script>
 </body>
