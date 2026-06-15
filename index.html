@@ -128,16 +128,16 @@
 </div>
 
 <script>
-    // ---------- MODE DEFINITIONS (đã sửa ảnh Pot) ----------
+    // ---------- MODE DEFINITIONS (ĐÃ CẬP NHẬT ICON THEO LINK MỚI) ----------
     const MODES = [
-        { id: "sword", name: "Sword", iconUrl: "https://media.discordapp.net/attachments/1502227983694303312/1502227983828783175/sword.png?ex=6a0ec455&is=6a0d72d5&hm=4b06b00213a4e4952bda00182688054045f9c72941a65243c5ff08dfac6c6e85&=&format=webp&quality=lossless&width=569&height=569" },
-        { id: "axe", name: "Axe", iconUrl: "https://media.discordapp.net/attachments/1502227900072595476/1502227900210876437/axe.png?ex=6a0ec441&is=6a0d72c1&hm=dfce75bfd6d289edbaa635faff6334abd2c196f68117378471db73c953bb3fde&=&format=webp&quality=lossless&width=569&height=569" },
-        { id: "mace", name: "Mace", iconUrl: "https://media.discordapp.net/attachments/1502227665325785118/1502227665485299732/mace.png?ex=6a0ec409&is=6a0d7289&hm=ca8714bb036949aee0256887f0f35a63bc7f57f876853382da634255ed08fdc8&=&format=webp&quality=lossless&width=569&height=569" },
-        { id: "pot", name: "Pot", iconUrl: "https://media.discordapp.net/attachments/1405479003309084805/1405479003598356490/pot.png?ex=6a14bb12&is=6a136992&hm=75e9b674809ba442b0e4d6e2f0c377a87a71b11d905282264ff9041bb80b57cc&=&format=webp&quality=lossless&width=656&height=656" },
-        { id: "nethop", name: "NethOP", iconUrl: "https://media.discordapp.net/attachments/1502227947572957264/1502227948273537074/nethop.png?ex=6a0ec44c&is=6a0d72cc&hm=f904516ada3d32a615a34448b7da1ea1b0c833292cd581382c6f6d6b4975f5aa&=&format=webp&quality=lossless&width=569&height=569" },
-        { id: "uhc", name: "UHC", iconUrl: "https://media.discordapp.net/attachments/1502227841557729420/1502227841817907260/uhc.png?ex=6a0ec433&is=6a0d72b3&hm=dd19fcd1473d4f83cc16423fe9cbd9bb92c3ee4734346cf7f19e13d990cec525&=&format=webp&quality=lossless&width=569&height=569" },
-        { id: "vanilla", name: "Vanilla", iconUrl: "https://media.discordapp.net/attachments/1502227720816558131/1502227721391046756/vanilla.png?ex=6a0ec416&is=6a0d7296&hm=2957da56a34577f4a42978da32161fff6fdc049d6078679dd96d63ea046e54f9&=&format=webp&quality=lossless&width=569&height=569" },
-        { id: "smp", name: "SMP", iconUrl: "https://media.discordapp.net/attachments/1502227794997018654/1502227795189698580/smp.png?ex=6a0ec428&is=6a0d72a8&hm=8d29df6a0643b6bd0ddae6265713d0ea9e197c7221d636b907271132cb8af309&=&format=webp" }
+        { id: "sword", name: "Sword", iconUrl: "https://mctiers.com/tier_icons/sword.svg" },
+        { id: "axe", name: "Axe", iconUrl: "https://mctiers.com/tier_icons/axe.svg" },
+        { id: "mace", name: "Mace", iconUrl: "https://mctiers.com/tier_icons/mace.svg" },
+        { id: "pot", name: "Pot", iconUrl: "https://mctiers.com/tier_icons/pot.svg" },
+        { id: "nethop", name: "NethOP", iconUrl: "https://mctiers.com/tier_icons/nethop.svg" },
+        { id: "uhc", name: "UHC", iconUrl: "https://mctiers.com/tier_icons/uhc.svg" },
+        { id: "vanilla", name: "Vanilla", iconUrl: "https://mctiers.com/tier_icons/vanilla.svg" },
+        { id: "smp", name: "SMP", iconUrl: "https://mctiers.com/tier_icons/smp.svg" }
     ];
 
     const RANK_POINTS = { "HT1":100, "LT1":95, "HT2":90, "LT2":85, "HT3":80, "LT3":75, "HT4":70, "LT4":65, "HT5":60, "LT5":50 };
@@ -275,21 +275,15 @@
     // ---- Tự động lấy cập nhật từ API (giả lập) ----
     async function fetchDiscordUpdates() {
         try {
-            // Gọi đến endpoint API do bạn tự host (ví dụ: http://localhost:5000/api/get-results)
-            // Nếu chưa có backend, dùng dữ liệu mẫu minh họa
-            const response = await fetch('/api/get-results'); // Thay bằng URL thật của server
+            const response = await fetch('/api/get-results');
             if (!response.ok) throw new Error('API error');
             const results = await response.json();
             for (let res of results) {
-                // res = { ign, region, gamemode, rankEarned }
                 const existing = players.find(p => p.ign.toLowerCase() === res.ign.toLowerCase());
-                const modeId = res.gamemode.toLowerCase().replace(/ /g, ''); // "crystalpvp" -> không có trong MODES? Cần mapping
-                // Mapping gamemode từ test result sang mode ID (theo ảnh: "Crystal Pvp" -> ? Nhưng MODES chỉ có sword,axe,...)
-                // Tạm thời bỏ qua hoặc thêm mode mới. Trong ảnh ví dụ: "Crystal Pvp" không có trong danh sách, nhưng yêu cầu "Test Vanilla được HT4" thì có.
-                // Theo ảnh: "Gamemode: Crystal Pvp" và "Rank Earned: Low Tier 4" nhưng không rõ mapping. Để đơn giản, nếu gamemode là "Vanilla" thì cập nhật.
+                const modeId = res.gamemode.toLowerCase().replace(/ /g, '');
                 if (res.gamemode.toLowerCase() === 'vanilla' && modeId === 'vanilla') {
                     if (existing) {
-                        existing.modes.vanilla = res.rankEarned; // ví dụ "HT4"
+                        existing.modes.vanilla = res.rankEarned;
                         showToast(`Updated ${res.ign} Vanilla rank to ${res.rankEarned}`);
                     } else {
                         const newPlayer = {
@@ -308,7 +302,6 @@
             }
         } catch(e) {
             console.warn("Cannot fetch updates from API. Using demo data instead.");
-            // Demo data từ ảnh: HuuThien_, Vanilla HT4, Asia
             const demo = { ign: "HuuThien_", region: "AS", gamemode: "Vanilla", rankEarned: "HT4" };
             const existing = players.find(p => p.ign.toLowerCase() === demo.ign.toLowerCase());
             if (!existing) {
